@@ -1,4 +1,5 @@
 import { games } from "@/data/games";
+import { siteConfig } from "@/config/site";
 import { GameCard } from "./GameCard";
 import { SectionHeading } from "./SectionHeading";
 
@@ -8,15 +9,19 @@ export function GameGrid() {
       <div className="mx-auto max-w-6xl px-5 py-24">
         <SectionHeading
           eyebrow="Acervo"
-          title="Jogos em exposição"
+          title="Acervo"
           description="Projetos criados pelos alunos e publicados para todo mundo jogar."
         />
+        <p className="label-mono mt-6">
+          Coleção de jogos · {siteConfig.year}
+          {siteConfig.schoolName ? ` · ${siteConfig.schoolName}` : ""}
+        </p>
 
         {games.length === 0 ? (
           <div className="mt-12 border border-dashed border-border-strong p-12 text-center">
-            <p className="font-display text-lg font-bold">Nenhum jogo cadastrado ainda</p>
+            <p className="font-display text-lg font-bold">O acervo ainda está sendo preparado.</p>
             <p className="mt-2 text-sm text-muted-foreground">
-              O acervo aparece aqui assim que o primeiro jogo for adicionado.
+              Novos jogos serão adicionados em breve.
             </p>
           </div>
         ) : (

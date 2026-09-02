@@ -1,20 +1,24 @@
 export type GameColor = "yellow" | "pink" | "green" | "blue" | "purple";
 
-export type Game = {
+export interface Game {
   id: string;
   title: string;
   authors: string;
   description: string;
   technology: string;
+  year?: number;
+  image?: string;
   link?: string;
   embedUrl?: string;
+  skills?: string[];
   featured?: boolean;
-  color: GameColor;
-};
+  color?: GameColor;
+}
 
 /**
  * Para publicar um novo jogo, basta adicionar um objeto nesta lista.
- * O card, a contagem do acervo e a página individual são gerados automaticamente.
+ * Card, número do acervo, contagem e página individual são gerados automaticamente.
+ * Coloque a imagem em public/games/<id>.png e informe em `image`.
  */
 export const games: Game[] = [
   {
@@ -23,8 +27,9 @@ export const games: Game[] = [
     authors: "Equipe Pixel",
     description: "Resolva os desafios usando lógica e atenção.",
     technology: "MakeCode Arcade",
+    year: 2026,
     link: "https://arcade.makecode.com/",
-    embedUrl: "",
+    skills: ["Lógica", "Condicionais", "Variáveis", "Eventos"],
     featured: true,
     color: "yellow",
   },
@@ -34,9 +39,9 @@ export const games: Game[] = [
     authors: "João e Pedro",
     description: "Encontre a saída antes que o tempo acabe.",
     technology: "MakeCode Arcade",
+    year: 2026,
     link: "https://arcade.makecode.com/",
-    embedUrl: "",
-    featured: false,
+    skills: ["Coordenadas", "Colisões", "Temporizadores"],
     color: "green",
   },
   {
@@ -45,13 +50,31 @@ export const games: Game[] = [
     authors: "Turma da tarde",
     description: "Desvie dos blocos e sobreviva o máximo que conseguir.",
     technology: "MakeCode Arcade",
+    year: 2026,
     link: "https://arcade.makecode.com/",
-    embedUrl: "",
-    featured: false,
+    skills: ["Repetição", "Pontuação", "Sprites"],
     color: "pink",
   },
 ];
 
+export const defaultColor: GameColor = "blue";
+
+export const gameColor = (game: Game): GameColor => game.color ?? defaultColor;
+
+/** Número de catalogação automático, com base na posição no array. */
+export const acervoNumber = (game: Game) => {
+  const index = games.findIndex((g) => g.id === game.id);
+  return String(index + 1).padStart(3, "0");
+};
+
 export const getGameById = (id: string) => games.find((game) => game.id === id);
 
 export const featuredGames = () => games.filter((game) => game.featured);
+
+export const gameNeighbors = (id: string) => {
+  const index = games.findIndex((game) => game.id === id);
+  return {
+    previous: index > 0 ? games[index - 1] : undefined,
+    next: index >= 0 && index < games.length - 1 ? games[index + 1] : undefined,
+  };
+};
