@@ -1,24 +1,40 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Header } from "@/components/museum/Header";
+import { Hero } from "@/components/museum/Hero";
+import { GameGrid } from "@/components/museum/GameGrid";
+import { FeaturedGames } from "@/components/museum/FeaturedGames";
+import { About } from "@/components/museum/About";
+import { Technologies } from "@/components/museum/Technologies";
+import { Footer } from "@/components/museum/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Museu dos Jogos — galeria digital de jogos feitos em aula";
+const description =
+  "Acervo de jogos criados por alunos durante as aulas de programação. Conheça e jogue os projetos direto no navegador.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <Header />
+      <main>
+        <Hero />
+        <FeaturedGames />
+        <GameGrid />
+        <About />
+        <Technologies />
+      </main>
+      <Footer />
     </div>
   );
 }
