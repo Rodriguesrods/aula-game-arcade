@@ -29,7 +29,7 @@ function SobrePage() {
         <section className="relative overflow-hidden border-b border-border">
           <div className="grid-backdrop pointer-events-none absolute inset-0 opacity-50" />
           <div className="relative mx-auto max-w-6xl px-5 py-24">
-            <p className="label-mono">{siteConfig.school}</p>
+            <p className="label-mono">{siteConfig.schoolName || "Sobre o projeto"}</p>
             <h1 className="mt-6 max-w-2xl text-4xl leading-[1.08] font-bold sm:text-5xl">
               Um museu construído aula após aula.
             </h1>

@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { siteConfig } from "@/config/site";
+import { games } from "@/data/games";
 
 export function Hero() {
   return (
@@ -30,6 +31,10 @@ export function Hero() {
             <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </Link>
           <div className="label-mono flex flex-wrap items-center gap-2">
+            <span>
+              {games.length} {games.length === 1 ? "peça no acervo" : "peças no acervo"}
+            </span>
+            <span className="text-border-strong">•</span>
             {siteConfig.stack.map((tech, i) => (
               <span key={tech} className="flex items-center gap-2">
                 {i > 0 && <span className="text-border-strong">•</span>}
