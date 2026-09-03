@@ -8,7 +8,9 @@ export function FeaturedGames() {
   const featured = featuredGames();
   if (featured.length === 0) return null;
 
-  const [main, ...rest] = featured;
+  const main = featured[0];
+  const rest = featured.slice(1);
+  if (!main) return null;
 
   return (
     <section className="relative border-b border-border">
