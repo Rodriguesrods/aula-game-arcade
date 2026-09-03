@@ -6,7 +6,9 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-14 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-sm">
           <p className="font-display text-lg font-bold">{siteConfig.title}</p>
-          <p className="mt-1 text-sm text-muted-foreground">Projetos criados em sala de aula.</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {siteConfig.schoolName || "Projetos criados em sala de aula."}
+          </p>
           <p className="mt-4 text-sm text-muted-foreground">
             Projeto desenvolvido durante as aulas de programação.
           </p>
