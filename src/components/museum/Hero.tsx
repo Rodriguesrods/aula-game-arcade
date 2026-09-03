@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { siteConfig } from "@/config/site";
+import { games } from "@/data/games";
 
 export function Hero() {
   return (
