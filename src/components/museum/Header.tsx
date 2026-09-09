@@ -17,13 +17,20 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="flex items-center gap-5 sm:gap-7">
+        <nav aria-label="Navegação principal" className="flex items-center gap-4 sm:gap-7">
           <Link
             to="/"
             hash="jogos"
-            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block"
+            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground md:block"
           >
-            Jogos
+            Acervo
+          </Link>
+          <Link
+            to="/"
+            hash="como-nasceu"
+            className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground lg:block"
+          >
+            Como nasceu
           </Link>
           <Link
             to="/sobre"
@@ -31,7 +38,7 @@ export function Header() {
           >
             Sobre o projeto
           </Link>
-          <span className="label-mono shrink-0 border-l border-border pl-5 whitespace-nowrap">
+          <span className="label-mono hidden shrink-0 border-l border-border pl-5 whitespace-nowrap sm:block">
             {count} {count === 1 ? "jogo" : "jogos"} publicados
           </span>
         </nav>

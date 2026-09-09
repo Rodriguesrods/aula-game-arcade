@@ -105,14 +105,14 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 }
 
 @utility label-mono {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
 }
@@ -128,6 +128,10 @@
   box-shadow: 0 0 0 1px var(--color-border), 0 24px 60px -32px oklch(0.72 0.13 245 / 35%);
 }
 
+@utility museum-shadow {
+  box-shadow: 0 28px 72px -48px oklch(0 0 0 / 85%);
+}
+
 @utility rise-in {
   animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -140,6 +144,17 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise-in {
+    animation: none;
   }
 }
 

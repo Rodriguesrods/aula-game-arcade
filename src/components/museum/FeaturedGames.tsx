@@ -41,39 +41,36 @@ function FeaturedMain({ game }: { game: Game }) {
   const color = gameColor(game);
 
   return (
-    <Link
-      to="/games/$gameId"
-      params={{ gameId: game.id }}
-      aria-label={`Abrir ficha de ${game.title}`}
-      className="group flex flex-col overflow-hidden border border-border bg-surface transition-all duration-300 hover:-translate-y-1 hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none lg:col-span-2"
-    >
+    <article className="museum-shadow group grid overflow-hidden border border-border bg-surface transition-colors duration-300 hover:border-border-strong lg:col-span-3 lg:grid-cols-[1.35fr_1fr]">
       <GameImage
         game={game}
-        className="aspect-[16/9] w-full border-b border-border"
+        className="aspect-[16/10] min-h-full w-full border-b border-border lg:border-r lg:border-b-0"
         imageClassName="transition-transform duration-500 group-hover:scale-[1.03]"
       />
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
+      <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
         <div className="flex items-center gap-3">
           <span aria-hidden className={`h-1 w-8 ${accentBg[color]}`} />
           <span className="label-mono">Acervo nº {acervoNumber(game)}</span>
         </div>
-        <h3 className="mt-5 text-2xl font-bold sm:text-4xl">{game.title}</h3>
-        <p className="mt-2 text-sm text-muted-foreground sm:text-base">{game.authors}</p>
-        <p className={`label-mono mt-4 ${accentText[color]}`}>
-          {game.technology}
-          {game.year ? ` · ${game.year}` : ""}
-        </p>
+        <h3 className="mt-6 text-3xl font-bold sm:text-5xl">{game.title}</h3>
         <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground/90 sm:text-base">
           {game.description}
         </p>
-        <span className="mt-8 inline-flex items-center gap-2 self-start border border-border-strong px-4 py-2.5 text-sm font-medium transition-colors group-hover:bg-accent">
-          Jogar
-          <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-1">
-            →
-          </span>
-        </span>
+        <dl className="mt-7 grid grid-cols-2 gap-x-5 gap-y-4 border-t border-border pt-5 text-sm">
+          <div><dt className="label-mono">Equipe</dt><dd className="mt-1.5">{game.authors}</dd></div>
+          <div><dt className="label-mono">Tecnologia</dt><dd className={`mt-1.5 ${accentText[color]}`}>{game.technology}</dd></div>
+          {game.year && <div><dt className="label-mono">Ano</dt><dd className="mt-1.5">{game.year}</dd></div>}
+        </dl>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          {game.link ? (
+            <a href={game.link} target="_blank" rel="noreferrer noopener" className="inline-flex min-h-12 items-center gap-2 bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none">Jogar agora <span aria-hidden>↗</span></a>
+          ) : (
+            <Link to="/games/$gameId" params={{ gameId: game.id }} className="inline-flex min-h-12 items-center gap-2 bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">Jogar agora <span aria-hidden>→</span></Link>
+          )}
+          <Link to="/games/$gameId" params={{ gameId: game.id }} className="inline-flex min-h-11 items-center border-b border-border-strong text-sm font-medium transition-colors hover:border-foreground">Ver projeto</Link>
+        </div>
       </div>
-    </Link>
+    </article>
   );
 }
 

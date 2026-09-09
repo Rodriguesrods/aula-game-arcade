@@ -123,6 +123,16 @@ function GamePage() {
       <GameMetadata game={game} />
       <GameSkills game={game} />
 
+      {(game.idea || game.learnings?.length || game.process) && (
+        <section className="mx-auto max-w-6xl px-5 pb-16">
+          <div className="grid gap-px border border-border bg-border md:grid-cols-3">
+            {game.idea && <div className="bg-card p-6"><h2 className="label-mono">Ideia do projeto</h2><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{game.idea}</p></div>}
+            {game.learnings && game.learnings.length > 0 && <div className="bg-card p-6"><h2 className="label-mono">O que foi aprendido</h2><ul className="mt-4 space-y-2 text-sm text-muted-foreground">{game.learnings.map((item) => <li key={item}>— {item}</li>)}</ul></div>}
+            {game.process && <div className="bg-card p-6"><h2 className="label-mono">Processo de desenvolvimento</h2><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{game.process}</p></div>}
+          </div>
+        </section>
+      )}
+
       {(previous || next) && (
         <nav
           aria-label="Navegar pelo acervo"
