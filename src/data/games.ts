@@ -11,6 +11,9 @@ export interface Game {
   link?: string;
   embedUrl?: string;
   skills?: string[];
+  idea?: string;
+  learnings?: string[];
+  process?: string;
   featured?: boolean;
   color?: GameColor;
 }

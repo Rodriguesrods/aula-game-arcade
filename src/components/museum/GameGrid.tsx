@@ -12,7 +12,7 @@ export function GameGrid() {
           title="Acervo"
           description="Projetos criados pelos alunos e publicados para todo mundo jogar."
         />
-        <p className="label-mono mt-6">
+        <p className="label-mono mt-6 border-l border-yellow pl-4">
           Coleção de jogos · {siteConfig.year}
           {siteConfig.schoolName ? ` · ${siteConfig.schoolName}` : ""}
         </p>
@@ -25,7 +25,7 @@ export function GameGrid() {
             </p>
           </div>
         ) : (
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {games.map((game) => (
               <GameCard key={game.id} game={game} />
             ))}
