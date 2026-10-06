@@ -22,6 +22,8 @@ export interface Game {
  * Para publicar um novo jogo, basta adicionar um objeto nesta lista.
  * Card, número do acervo, contagem e página individual são gerados automaticamente.
  * Coloque a imagem em public/games/<id>.png e informe em `image`.
+ * A página /games/<id> usa idea (ideia), process (processo) e learnings
+ * (lista de aprendizados). Preencha com informações reais; vazios ficam ocultos.
  */
 export const games: Game[] = [
   {

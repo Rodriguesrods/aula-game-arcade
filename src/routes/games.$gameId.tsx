@@ -5,6 +5,7 @@ import { GameImage } from "@/components/museum/GameImage";
 import { GameEmbed } from "@/components/museum/GameEmbed";
 import { GameMetadata } from "@/components/museum/GameMetadata";
 import { GameSkills } from "@/components/museum/GameSkills";
+import { GameStory } from "@/components/museum/GameStory";
 import { accentBg } from "@/components/museum/accent";
 import { acervoNumber, gameColor, gameNeighbors, getGameById } from "@/data/games";
 
@@ -20,6 +21,11 @@ export const Route = createFileRoute("/games/$gameId")({
       return {
         meta: [
           { title: "Jogo não encontrado — Museu dos Jogos" },
+          { name: "description", content: "Esta peça não foi encontrada no acervo do Museu dos Jogos." },
+          { property: "og:title", content: "Jogo não encontrado — Museu dos Jogos" },
+          { property: "og:description", content: "Esta peça não foi encontrada no acervo do Museu dos Jogos." },
+          { property: "og:type", content: "website" },
+          { name: "twitter:card", content: "summary" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -33,6 +39,10 @@ export const Route = createFileRoute("/games/$gameId")({
         { property: "og:description", content: game.description },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
+        ...(game.image?.startsWith("https://") ? [
+          { property: "og:image", content: game.image },
+          { name: "twitter:image", content: game.image },
+        ] : []),
       ],
     };
   },
@@ -123,15 +133,7 @@ function GamePage() {
       <GameMetadata game={game} />
       <GameSkills game={game} />
 
-      {(game.idea || game.learnings?.length || game.process) && (
-        <section className="mx-auto max-w-6xl px-5 pb-16">
-          <div className="grid gap-px border border-border bg-border md:grid-cols-3">
-            {game.idea && <div className="bg-card p-6"><h2 className="label-mono">Ideia do projeto</h2><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{game.idea}</p></div>}
-            {game.learnings && game.learnings.length > 0 && <div className="bg-card p-6"><h2 className="label-mono">O que foi aprendido</h2><ul className="mt-4 space-y-2 text-sm text-muted-foreground">{game.learnings.map((item) => <li key={item}>— {item}</li>)}</ul></div>}
-            {game.process && <div className="bg-card p-6"><h2 className="label-mono">Processo de desenvolvimento</h2><p className="mt-4 text-sm leading-relaxed text-muted-foreground">{game.process}</p></div>}
-          </div>
-        </section>
-      )}
+      <GameStory game={game} />
 
       {(previous || next) && (
         <nav
