@@ -60,6 +60,68 @@ export const games: Game[] = [
     skills: ["Repetição", "Pontuação", "Sprites"],
     color: "pink",
   },
+  // ============ NOVOS SLOTS — preencha abaixo (jogos 04 a 10) ============
+  // Dica: troque `title`, `authors`, `description` e `technology` pelos dados
+  // reais. Opcional: `year`, `image` (public/games/<id>.png), `link` ou
+  // `embedUrl`, `skills`, `idea`, `process`, `learnings` e `featured`.
+  // O número do acervo, os cards e a página individual são gerados sozinhos.
+  {
+    id: "novo-jogo-04",
+    title: "Novo jogo 04",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "blue",
+  },
+  {
+    id: "novo-jogo-05",
+    title: "Novo jogo 05",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "purple",
+  },
+  {
+    id: "novo-jogo-06",
+    title: "Novo jogo 06",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "yellow",
+  },
+  {
+    id: "novo-jogo-07",
+    title: "Novo jogo 07",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "green",
+  },
+  {
+    id: "novo-jogo-08",
+    title: "Novo jogo 08",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "pink",
+  },
+  {
+    id: "novo-jogo-09",
+    title: "Novo jogo 09",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "blue",
+  },
+  {
+    id: "novo-jogo-10",
+    title: "Novo jogo 10",
+    authors: "A definir",
+    description: "Descrição breve do projeto.",
+    technology: "A definir",
+    color: "purple",
+  },
+  // ============ FIM DOS NOVOS SLOTS ============
 ];
 
 export const defaultColor: GameColor = "blue";
