@@ -1,574 +1,246 @@
-# Aula Arcade
 
-Crie um site completo chamado "Museu dos Jogos", uma galeria digital de jogos criados por alunos durante aulas de programação.
 
-O conceito do projeto é:
 
-"Cada jogo daqui nasceu numa aula."
+## 📖 Sobre o projeto
 
-A ideia é funcionar como um pequeno museu/arcade digital onde os visitantes podem conhecer e jogar os projetos desenvolvidos pelos alunos. O site deve valorizar o trabalho dos estudantes e permitir que novos jogos sejam adicionados facilmente pelo professor.
+O **Museu dos Jogos** é um acervo online que reúne os jogos e projetos feitos pelos alunos enquanto aprendem lógica de programação, criatividade e trabalho em equipe. Em vez de os trabalhos ficarem esquecidos em um computador da sala, cada projeto vira uma "peça de museu": tem número de acervo, equipe, tecnologia usada, ano e um botão para jogar direto no navegador.
 
-IMPORTANTE:
+O site foi pensado para ser divulgado para a escola inteira (alunos, pais, professores e direção), então precisa ser:
 
-Use a imagem de referência anexada nesta conversa como referência visual para a direção inicial do design, principalmente a estética escura, tipografia, espaçamento e cards. Porém, evolua essa ideia para um conceito mais sofisticado de "museu contemporâneo de jogos + arcade", sem simplesmente copiar a interface.
+- **Simples de abrir**, principalmente pelo celular (muita gente chega pelo WhatsApp);
+- **Fácil de manter**, para o professor adicionar um jogo novo em poucos minutos;
+- **Seguro**, já que os autores são menores de idade: o site não coleta dados dos visitantes.
 
-==================================================
+### A ideia pedagógica
 
-IDENTIDADE VISUAL
+Todo jogo do acervo passa pelo mesmo caminho, que também aparece no site:
 
-==================================================
+| Etapa | Pergunta |
+|-------|----------|
+| 01 · Ideia | O que queremos criar? |
+| 02 · Lógica | Como o jogo vai funcionar? |
+| 03 · Código | Como transformar a ideia em comandos? |
+| 04 · Teste | Jogando, errando e ajustando. |
+| 05 · Publicado | Compartilhando o resultado. |
 
-Estética:
+---
 
-- Dark mode como identidade principal.
+## 🎮 Acervo atual (coleção 2026)
 
-- Visual de museu digital contemporâneo misturado com arcade.
+| Nº | Jogo | Equipe | Tecnologia |
+|----|------|--------|------------|
+| 001 | Detetive da Lógica | Equipe Pixel | MakeCode Arcade |
+| 002 | Fuga do Labirinto | João e Pedro | MakeCode Arcade |
+| 003 | Chuva de Pixels | Turma da tarde | MakeCode Arcade |
 
-- Minimalista, elegante e tecnológico.
+> 🔔 Esta tabela é atualizada manualmente quando um jogo novo entra no acervo.
 
-- Não deixar com aparência infantil ou de site escolar tradicional.
+---
 
-- Pequenos detalhes inspirados em interfaces de videogames.
+## ✨ Funcionalidades
 
-- Fundo quase preto/azul-marinho muito escuro.
+### Já existentes
 
-- Cards com bordas sutis.
+- Página inicial com apresentação, acervo e seção "Como nasceu";
+- Página **Sobre o projeto**;
+- Página individual para cada jogo (`/games/<slug>`);
+- Cards do acervo com título, descrição curta, equipe, tecnologia e ano;
+- Seção de tecnologias usadas (MakeCode Arcade, JavaScript, HTML e CSS);
+- Meta tags básicas para compartilhamento.
 
-- Pequenos detalhes coloridos em amarelo, rosa, verde, azul e roxo.
+### Em refinamento
 
-- Glow extremamente sutil.
+- Dados de todos os jogos centralizados em um único arquivo;
+- Jogo embutido na página (iframe) quando a plataforma permitir;
+- Blocos "Como jogar" e "Como foi feito" em cada jogo;
+- Filtros por turma e tecnologia, e busca por texto;
+- Botão de compartilhar (copiar link e WhatsApp) e navegação entre jogos;
+- Página `/qr` com QR code pronto para imprimir em cartaz;
+- Seção "Como participar / enviar um jogo";
+- Página 404 temática ("Peça não encontrada no acervo");
+- Revisão de acessibilidade e de uso no celular.
 
-- Tipografia moderna e forte.
+---
 
-- Bastante espaço negativo.
+## 🧱 Tecnologias do site
 
-- Microinterações suaves.
+O projeto foi criado no [Lovable](https://lovable.dev). Confira o `package.json` para as versões exatas; a stack padrão do Lovable é:
 
-- Animações discretas ao passar o mouse.
+- **React** + **TypeScript**
+- **Vite**
+- **Tailwind CSS**
+- **shadcn/ui**
 
-- Evitar excesso de gradientes, neon exagerado ou elementos decorativos.
+Os **jogos** em si são feitos com:
 
-A sensação deve ser:
+- [MakeCode Arcade](https://arcade.makecode.com/) (blocos e JavaScript)
+- HTML, CSS e JavaScript puros (para exercícios feitos em sala, como a calculadora)
 
-"um pequeno museu online onde os jogos dos alunos estão expostos."
+---
 
-==================================================
+## 🗂️ Estrutura do projeto
 
-PÁGINA INICIAL
+> Ajuste os caminhos abaixo se a estrutura gerada no seu projeto for diferente.
 
-==================================================
+```
+.
+├── public/                 # Imagens estáticas, favicon, capas dos jogos
+├── src/
+│   ├── data/
+│   │   └── games.ts        # ⭐ Lista de todos os jogos do acervo
+│   ├── components/         # Cards, cabeçalho, rodapé, filtros etc.
+│   ├── pages/ (ou routes/) # Home, Sobre, página de cada jogo, 404
+│   └── ...
+├── package.json
+└── README.md
+```
 
-Criar um header simples:
+O arquivo mais importante para o dia a dia é o `games.ts`: **é só ele que você edita para colocar um jogo novo no ar.**
 
-"Museu dos Jogos"
+---
 
-No lado direito:
+## ➕ Como adicionar um jogo ao acervo
 
-"3 jogos publicados"
+### 1. Publique o jogo e pegue o link
 
-Menu:
+**MakeCode Arcade**
 
-- Jogos
+1. Abra o projeto do aluno no MakeCode Arcade.
+2. Clique em **Compartilhar** (ícone no topo).
+3. Clique em **Publicar projeto** e copie o link gerado (formato `https://arcade.makecode.com/_xxxxxxxx`).
+4. Para o jogo rodar na própria página, use o link de **incorporar** (embed) que o MakeCode oferece na tela de compartilhamento.
 
-- Sobre o projeto
+> ⚠️ Não use `https://arcade.makecode.com/` (a página inicial). Ela abre o editor, não o jogo.
 
-Hero:
+**Projetos HTML/CSS/JS**
 
-Pequeno texto:
+Hospede o projeto (por exemplo, GitHub Pages) e use o link da página publicada.
 
-"FEITO EM SALA, AULA A AULA"
+### 2. Tire uma capa
 
-Título grande:
+Print ou GIF curto do jogo rodando. Prefira uma proporção fixa (por exemplo, 16:9) e coloque o arquivo em `public/covers/<slug>.png`.
 
-"Cada jogo daqui
+### 3. Adicione o item em `src/data/games.ts`
 
-nasceu numa aula."
-
-Texto:
-
-"Um acervo de jogos criados pelos alunos enquanto aprendem lógica, programação e criatividade."
-
-CTA:
-
-"Explorar jogos →"
-
-Adicionar uma pequena informação visual mostrando:
-
-"MakeCode Arcade • HTML • CSS • JavaScript"
-
-==================================================
-
-GALERIA DE JOGOS
-
-==================================================
-
-Criar uma seção:
-
-"Jogos em exposição"
-
-Texto:
-
-"Projetos criados pelos alunos e publicados para todo mundo jogar."
-
-Criar uma grade responsiva de cards.
-
-Cada card deve conter:
-
-- pequena faixa colorida no topo
-
-- nome do jogo
-
-- autores
-
-- descrição curta
-
-- tecnologia
-
-- botão "Jogar →"
-
-- pequeno elemento visual indicando que é um jogo
-
-Exemplo:
-
-Detetive da Lógica
-
-Equipe Pixel
-
-"Resolva os desafios usando lógica e atenção."
-
-MakeCode Arcade
-
-Jogar →
-
-Outro:
-
-Fuga do Labirinto
-
-João e Pedro
-
-"Encontre a saída antes que o tempo acabe."
-
-MakeCode Arcade
-
-Jogar →
-
-Os cards devem ter hover elegante:
-
-- leve elevação
-
-- borda ficando mais evidente
-
-- pequena mudança de brilho
-
-- seta se movimentando levemente
-
-==================================================
-
-PÁGINA / MODAL DO JOGO
-
-==================================================
-
-Ao clicar em "Jogar", abrir uma página individual para o jogo ou uma experiência de visualização dedicada.
-
-Mostrar:
-
-Nome do jogo
-
-Autores
-
-Descrição
-
-Tecnologias
-
-E principalmente:
-
-O jogo incorporado diretamente na página através do link/embed do MakeCode Arcade quando possível.
-
-Criar também um botão:
-
-"Abrir no MakeCode ↗"
-
-O visitante deve conseguir jogar sem sair do site quando o embed for suportado.
-
-==================================================
-
-SISTEMA DE JOGOS EDITÁVEL
-
-==================================================
-
-ESTA PARTE É MUITO IMPORTANTE.
-
-Não codifique os jogos diretamente dentro dos componentes da interface.
-
-Criar um arquivo separado para armazenar os dados dos jogos, por exemplo:
-
-src/data/games.ts
-
-Todos os cards e páginas devem ser gerados automaticamente a partir desse arquivo.
-
-Estrutura:
-
-export const games = [
-
-  {
-
-    id: "detetive-da-logica",
-
-    title: "Detetive da Lógica",
-
-    authors: "Nome dos alunos",
-
-    description: "Descrição do jogo.",
-
-    technology: "MakeCode Arcade",
-
-    link: "LINK_DO_JOGO",
-
-    embedUrl: "URL_DO_EMBED",
-
-    featured: true,
-
-    color: "yellow"
-
-  }
-
-];
-
-Quando o professor quiser adicionar um novo jogo, ele deve precisar apenas adicionar um novo objeto nesse arquivo.
-
-Exemplo:
-
+```ts
 {
-
-  id: "novo-jogo",
-
-  title: "Novo Jogo",
-
-  authors: "Ana e Pedro",
-
-  description: "Descrição do novo jogo.",
-
-  technology: "MakeCode Arcade",
-
-  link: "LINK_DO_JOGO",
-
-  embedUrl: "URL_DO_EMBED",
-
-  featured: false,
-
-  color: "green"
-
+  slug: "nome-do-jogo",              // usado na URL: /games/nome-do-jogo
+  titulo: "Nome do Jogo",
+  descricaoCurta: "Uma frase que resume o jogo.",
+  descricaoLonga: "Parágrafo explicando a ideia e o objetivo.",
+  equipe: "Equipe Exemplo",          // primeiro nome, apelido ou nome de equipe
+  turma: "Turma da manhã",
+  tecnologia: "MakeCode Arcade",
+  ano: 2026,
+  link: "https://arcade.makecode.com/_xxxxxxxx",
+  abertura: "embed",                 // "embed" (roda na página) ou "externo" (abre nova aba)
+  capa: "/covers/nome-do-jogo.png",
+  controles: "Setas para mover · A para pular",
+  objetivo: "Chegue até o final sem perder todas as vidas.",
+  comoFoiFeito: "Frase curta do aluno sobre o que aprendeu.",
+  destaque: false,
 }
+```
 
-O site deve automaticamente:
+### 4. Publique
 
-- criar o novo card
+Salve, faça o commit e publique pelo Lovable (ou pelo fluxo de deploy que você usar). O contador do acervo, os cards e a página do jogo devem se atualizar a partir da lista.
 
-- atualizar a quantidade de jogos publicados
+---
 
-- disponibilizar a página do jogo
+## 🔒 Privacidade (projeto com menores de idade)
 
-- mostrar o jogo na galeria
+- Exiba **apenas primeiro nome, apelido ou nome de equipe**. Nunca nome completo, turma específica com horário ou qualquer dado que identifique o aluno fora da escola.
+- Combine com alunos e responsáveis, **antes** de publicar, como o nome vai aparecer.
+- O site **não tem login, formulário de cadastro, comentários públicos nem rastreamento** de visitantes. Se for adicionar algo desse tipo no futuro, avalie antes as regras da escola e a LGPD.
+- Jogos hospedados em plataformas externas (como o MakeCode) seguem as regras e a política de privacidade dessas plataformas.
 
-Não duplicar código para cada jogo.
+---
 
-==================================================
+## 🛠️ Rodando localmente
 
-ÁREA DE CONFIGURAÇÃO
+Pré-requisitos: [Node.js](https://nodejs.org/) (versão LTS) e npm.
 
-==================================================
+```bash
+# 1. Clone o repositório
+git clone <URL_DO_REPOSITORIO>
+cd <NOME_DA_PASTA>
 
-Criar também um arquivo central de configuração:
+# 2. Instale as dependências
+npm install
 
-src/config/site.ts
-
-Nele devem ficar informações fáceis de alterar pelo professor:
-
-- nome do projeto
-
-- subtítulo
-
-- descrição
-
-- nome da escola/projeto, se houver
-
-- ano
-
-- quantidade de jogos deve ser calculada automaticamente, não digitada manualmente
-
-Exemplo:
-
-export const siteConfig = {
-
-  title: "Museu dos Jogos",
-
-  subtitle: "Cada jogo daqui nasceu numa aula.",
-
-  year: 2026
-
-};
-
-==================================================
-
-SEÇÃO "SOBRE O PROJETO"
-
-==================================================
-
-Criar uma seção explicando:
-
-"Como esse museu nasceu"
-
-Texto curto:
-
-"Durante as aulas, os alunos aprendem programação colocando ideias em prática. Cada jogo representa uma experiência, uma tentativa, um problema resolvido e uma nova habilidade aprendida."
-
-Mostrar uma pequena linha do processo:
-
-IDEIA → LÓGICA → CÓDIGO → TESTE → JOGO PUBLICADO
-
-Usar uma apresentação visual elegante.
-
-==================================================
-
-HALL DA FAMA
-
-==================================================
-
-Criar uma seção opcional chamada:
-
-"Em destaque"
-
-Mostrar os jogos que possuem:
-
-featured: true
-
-Esses jogos devem aparecer com um tratamento visual um pouco diferente.
-
-Não criar conteúdo fictício demais. Usar os três jogos de exemplo apenas como dados demonstrativos.
-
-==================================================
-
-TECNOLOGIAS
-
-==================================================
-
-Criar uma pequena seção:
-
-"Feito para aprender."
-
-Mostrar tecnologias utilizadas no projeto/aula:
-
-MakeCode Arcade
-
-JavaScript
-
-HTML
-
-CSS
-
-A apresentação deve ser visual e minimalista.
-
-==================================================
-
-RODAPÉ
-
-==================================================
-
-Rodapé simples:
-
-"Museu dos Jogos"
-
-"Projetos criados em sala de aula."
-
-2026
-
-Adicionar espaço para:
-
-"Projeto desenvolvido durante as aulas de programação."
-
-==================================================
-
-RESPONSIVIDADE
-
-==================================================
-
-O site deve ser totalmente responsivo.
-
-Desktop:
-
-- galeria em 3 colunas
-
-- hero amplo
-
-- bastante espaço negativo
-
-Tablet:
-
-- 2 colunas
-
-Mobile:
-
-- 1 coluna
-
-- header adaptado
-
-- tipografia reduzida proporcionalmente
-
-- cards ocupando quase toda a largura
-
-- jogo incorporado adaptado à tela
-
-==================================================
-
-TECNOLOGIA
-
-==================================================
-
-Utilize:
-
-- React
-
-- TypeScript
-
-- Vite
-
-- CSS moderno ou Tailwind
-
-- componentes reutilizáveis
-
-Estruture o projeto de forma limpa.
-
-Sugestão:
-
-src/
-
-  components/
-
-    Header
-
-    Hero
-
-    GameCard
-
-    GameGrid
-
-    FeaturedGames
-
-    About
-
-    Footer
-
-  data/
-
-    games.ts
-
-  config/
-
-    site.ts
-
-  pages/
-
-    Home
-
-    Game
-
-Não colocar toda a aplicação em um único arquivo.
-
-==================================================
-
-EXPERIÊNCIA
-
-==================================================
-
-Priorize:
-
-- performance
-
-- acessibilidade
-
-- navegação simples
-
-- boa hierarquia visual
-
-- animações suaves
-
-- código organizado
-
-- facilidade de manutenção
-
-Adicionar estados para:
-
-- nenhum jogo cadastrado
-
-- jogo não encontrado
-
-- link do jogo indisponível
-
-Não criar login, banco de dados ou painel administrativo nesta primeira versão.
-
-A prioridade é criar uma primeira versão bonita, funcional e fácil de atualizar manualmente pelo arquivo games.ts.
-
-==================================================
-
-RESULTADO ESPERADO
-
-==================================================
-
-O resultado deve parecer uma mistura de:
-
-MUSEU DIGITAL
-
-+
-
-ARCADE
-
-+
-
-PORTFÓLIO DE ALUNOS
-
-+
-
-GALERIA DE PROJETOS
-
-O site deve transmitir a sensação de que cada jogo é uma pequena peça exposta em um acervo criado durante as aulas.
-
-Evite:
-
-- visual infantil
-
-- excesso de elementos
-
-- excesso de neon
-
-- emojis espalhados pela interface
-
-- aparência de template genérico
-
-- textos enormes
-
-- cards excessivamente arredondados
-
-Quero um design sofisticado, moderno, tecnológico e divertido na medida certa.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://aula-game-arcade.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/377928b8-8bbb-4283-a525-e016b4aafa62).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+# 3. Rode em modo de desenvolvimento
 npm run dev
 ```
+
+O site abre em `http://localhost:5173` (porta padrão do Vite).
+
+### Outros comandos úteis
+
+```bash
+npm run build     # Gera a versão de produção
+npm run preview   # Visualiza a versão de produção localmente
+```
+
+---
+
+## 🚀 Publicação
+
+- **Atual:** publicado pelo Lovable em `aula-game-arcade.lovable.app`.
+- **Domínio próprio (opcional):** vale a pena usar um endereço mais curto e fácil de lembrar, principalmente para cartazes e QR code. O Lovable permite conectar um domínio personalizado nas configurações do projeto.
+- **Alternativa:** como a build gera arquivos estáticos, também é possível hospedar em GitHub Pages, Vercel ou Netlify.
+
+---
+
+## 📣 Divulgação na escola
+
+Checklist antes de anunciar:
+
+- [ ] Todos os botões "Jogar agora" levam ao **jogo certo** (não à home do MakeCode)
+- [ ] Todos os cards têm **capa**
+- [ ] Nomes dos alunos conferidos e **autorizados**
+- [ ] Testado em **celular** (Android e iPhone) e em computador
+- [ ] Imagem de prévia (Open Graph) aparece bem ao colar o link no WhatsApp
+- [ ] Página `/qr` impressa em cartaz
+- [ ] Nome da escola e do professor no rodapé e na página Sobre
+
+---
+
+## 🗺️ Roadmap
+
+- [ ] Concluir a centralização dos dados em `games.ts`
+- [ ] Jogos embutidos na página com botão de tela cheia
+- [ ] Filtros e busca quando o acervo passar de ~6 jogos
+- [ ] Selo "Novo" para jogos recentes
+- [ ] Seção "Jogo da semana"
+- [ ] Recorde da turma por jogo (editável manualmente)
+- [ ] Domínio próprio
+- [ ] Coleção 2027
+
+---
+
+## 🎁 Peça especial: o jogo de despedida
+
+Está nos planos um jogo feito pelo professor para se despedir da turma, a ser exposto como **Acervo nº 000**, a peça de abertura do museu. A ideia é que seja curto (3 a 5 minutos), personalizado com a turma, com fases ligadas aos conceitos vistos em aula e uma tela final com uma mensagem.
+
+---
+
+## 👥 Créditos
+
+- **Idealização, aulas e manutenção do site:** _[seu nome]_
+- **Escola:** _[nome da escola]_
+- **Jogos:** criados pelos alunos, com os créditos indicados em cada peça.
+- **Ferramentas:** MakeCode Arcade, Lovable.
+
+---
+
+## 📄 Licença
+
+Defina a licença do projeto antes de abrir o repositório ao público. Sugestões:
+
+- **Código do site:** MIT, caso queira permitir que outros professores reutilizem o modelo.
+- **Jogos dos alunos:** os direitos pertencem aos autores; combine com eles e com os responsáveis como o material pode ser usado.
+
+---
+
+<p align="center"><i>Projeto desenvolvido durante as aulas de programação · 2026</i></p>
