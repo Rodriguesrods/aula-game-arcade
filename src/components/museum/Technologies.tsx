@@ -2,6 +2,7 @@ import { SectionHeading } from "./SectionHeading";
 
 const tech = [
   { name: "MakeCode Arcade", note: "Blocos e JavaScript para criar jogos" },
+  { name: "CODE IA", note: "Blocos e JavaScript para criar jogos" },
   { name: "JavaScript", note: "Lógica, eventos e movimento" },
   { name: "HTML", note: "Estrutura das páginas" },
   { name: "CSS", note: "Layout, cor e ritmo visual" },

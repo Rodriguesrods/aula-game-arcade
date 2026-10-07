@@ -9,9 +9,11 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
         <Link to="/" className="flex min-w-0 items-center gap-2.5">
-          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-sm border border-border-strong">
-            <span className="h-2 w-2 bg-yellow" />
-          </span>
+          <img
+                src="/favicon-32x32.png"
+                alt="Logo"
+                className="h-7 w-7 shrink-0 object-contain"
+                />
           <span className="truncate font-display text-base font-bold tracking-tight">
             {siteConfig.title}
           </span>
