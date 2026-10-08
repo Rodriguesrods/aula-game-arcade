@@ -120,7 +120,7 @@ Hospede o projeto (por exemplo, GitHub Pages) e use o link da página publicada.
 
 Print ou GIF curto do jogo rodando. Prefira uma proporção fixa (por exemplo, 16:9) e coloque o arquivo em `public/covers/<slug>.png`.
 
-### 3. Adicione o item em `src/data/games.ts`
+### 3. Adicione o item em `public/games.ts`
 
 ```ts
 {

@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Generate individual game pages from `src/data/games.ts` at `/games/$gameId` and redirect `/jogo/$gameId` permanently to preserve old shared URLs.
+- Generate individual game pages from `public/games.ts` at `/games/$gameId` and redirect `/jogo/$gameId` permanently to preserve old shared URLs.
 - Render optional project narratives through `GameStory`, trimming blank text and learning entries so unfilled data never produces empty sections.
